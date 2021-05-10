@@ -10,6 +10,7 @@ import {
 	phoneNumber,
 	reset,
 } from "./store/formSlice";
+import FormDisplay from "./FormDisplay";
 
 function App() {
 	const state = useSelector((state) => {
@@ -18,10 +19,12 @@ function App() {
 	const dispatch = useDispatch();
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(() => reset());
+		dispatch(reset());
+		e.target.reset();
 	};
 	return (
 		<div className="App">
+			<h3>Form State Management With React And Redux Tookit</h3>
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<label htmlFor="firstName">First Name: </label>
 				<input
@@ -42,7 +45,7 @@ function App() {
 					placeholder="Enter Your Last Name"
 					name="lastName"
 					value={state.lastName}
-					onChange={(e) => dispatch(lastName({ payload: e.target.value }))}
+					onChange={(e) => dispatch(lastName(e.target.value))}
 					required
 				/>
 				<br />
@@ -54,7 +57,7 @@ function App() {
 					placeholder="Enter Your email"
 					name="email"
 					value={state.email}
-					onChange={(e) => dispatch(email({ payload: e.target.value }))}
+					onChange={(e) => dispatch(email(e.target.value))}
 					required
 				/>
 				<br />
@@ -97,6 +100,9 @@ function App() {
 				<br />
 				<input type="submit" value="Submit" />
 			</form>
+			<b>
+				<FormDisplay />
+			</b>
 		</div>
 	);
 }

@@ -12,22 +12,25 @@ export const formSlice = createSlice({
 	},
 	reducers: {
 		firstName: (state, action) => {
-			firstName: action.payload;
+			return {
+				...state,
+				firstName: action.payload,
+			};
 		},
 		lastName: (state, action) => {
-			lastName: action.payload;
+			return { ...state, lastName: action.payload };
 		},
 		email: (state, action) => {
-			email: action.payload;
+			return { ...state, email: action.payload };
 		},
 		password: (state, action) => {
-			password: action.payload;
+			return { ...state, password: action.payload };
 		},
 		phoneNumber: (state, action) => {
-			phoneNumber: action.payload;
+			return { ...state, phoneNumber: action.payload };
 		},
 		age: (state, action) => {
-			age: action.payload;
+			return { ...state, age: action.payload };
 		},
 		reset: (state, action) => {
 			return {
