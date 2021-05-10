@@ -1,25 +1,104 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	age,
+	email,
+	firstName,
+	lastName,
+	password,
+	phoneNumber,
+	reset,
+} from "./store/formSlice";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const state = useSelector((state) => {
+		return state;
+	});
+	const dispatch = useDispatch();
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(() => reset());
+	};
+	return (
+		<div className="App">
+			<form onSubmit={(e) => handleSubmit(e)}>
+				<label htmlFor="firstName">First Name: </label>
+				<input
+					type="text"
+					id="firstName"
+					placeholder="Enter Your First Name"
+					value={state.firstName}
+					name="firstName"
+					onChange={(e) => dispatch(firstName(e.target.value))}
+					required
+				/>
+				<br />
+				<br />
+				<label htmlFor="lastName">Last Name: </label>
+				<input
+					type="text"
+					id="lastName"
+					placeholder="Enter Your Last Name"
+					name="lastName"
+					value={state.lastName}
+					onChange={(e) => dispatch(lastName({ payload: e.target.value }))}
+					required
+				/>
+				<br />
+				<br />
+				<label htmlFor="email">E-mail: </label>
+				<input
+					type="email"
+					id="email"
+					placeholder="Enter Your email"
+					name="email"
+					value={state.email}
+					onChange={(e) => dispatch(email({ payload: e.target.value }))}
+					required
+				/>
+				<br />
+				<br />
+				<label htmlFor="password">Password: </label>
+				<input
+					type="password"
+					id="password"
+					placeholder="Enter Your Password"
+					name="password"
+					value={state.password}
+					onChange={(e) => dispatch(password(e.target.value))}
+					required
+				/>
+				<br />
+				<br />
+				<label htmlFor="age">Age: </label>
+				<input
+					type="text"
+					id="age"
+					placeholder="Enter Your Age"
+					name="age"
+					value={state.age}
+					onChange={(e) => dispatch(age(e.target.value))}
+					required
+				/>
+				<br />
+				<br />
+				<label htmlFor="phoneNumber">Phone Number: </label>
+				<input
+					type="text"
+					id="phoneNumber"
+					placeholder="Enter Your Phone Number"
+					name="phoneNumber"
+					value={state.phoneNumber}
+					onChange={(e) => dispatch(phoneNumber(e.target.value))}
+					required
+				/>
+				<br />
+				<br />
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
+	);
 }
 
 export default App;
